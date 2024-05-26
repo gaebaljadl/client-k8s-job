@@ -7,6 +7,6 @@ spec:
     spec:
       containers:
       - name: client
-        image: ghcr.io/dlddu/client:latest
+        image: ghcr.io/gaebaljadl/client:latest
       restartPolicy: Never
   backoffLimit: 4
