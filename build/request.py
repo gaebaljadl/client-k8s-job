@@ -12,11 +12,15 @@ def request_inference(i):
 
     response = requests.post(
         f"http://{url}/predict", files={"file": open("./image.jpg", "rb")}
-    )
-    predicted_class = response.json().get("predicted_class")
+    ).json()
+    process_time = sum(response.get("time"))
+    predicted_class = response.get("predicted_class")
 
     if str(predicted_class) == expected_result:
-        print(f"Request {i}: {time.time() - start_time} ms")
+        end_time = time.time() - start_time
+        print(
+            f"Request {i}: total {end_time} ms / process {process_time} / latency {end_time - process_time} ms"
+        )
     else:
         print(f"Request {i}: Fail ({predicted_class})")
 
